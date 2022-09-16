@@ -24,7 +24,7 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://enemy/enemy.gd"
 }, {
-"base": "",
+"base": "EditorVCSInterface",
 "class": "GitAPI",
 "language": "NativeScript",
 "path": "res://addons/godot-git-plugin/git_api.gdns"
@@ -55,7 +55,7 @@ config/description="This demo uses RigidBody2D for the player and enemies. These
 character controllers are more powerful than KinematicBody2D,
 but can be more difficult to handle, as they require
 manual modification of the RigidBody velocity."
-run/main_scene="res://Stage.tscn"
+run/main_scene="res://Scenes/menu.tscn"
 config/icon="res://icon.png"
 
 [debug]
