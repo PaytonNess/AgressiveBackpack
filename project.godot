@@ -24,7 +24,7 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://enemy/enemy.gd"
 }, {
-"base": "",
+"base": "EditorVCSInterface",
 "class": "GitAPI",
 "language": "NativeScript",
 "path": "res://addons/godot-git-plugin/git_api.gdns"
@@ -50,7 +50,7 @@ _global_script_class_icons={
 
 [application]
 
-config/name="Physics-Based Platformer 2D"
+config/name="Aggresive Backpack"
 config/description="This demo uses RigidBody2D for the player and enemies. These
 character controllers are more powerful than KinematicBody2D,
 but can be more difficult to handle, as they require
