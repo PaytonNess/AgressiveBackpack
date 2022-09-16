@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=2]
+[gd_scene load_steps=23 format=2]
 
 [ext_resource path="res://Tileset.tres" type="TileSet" id=1]
 [ext_resource path="res://coin/Coin.tscn" type="PackedScene" id=2]
@@ -9,6 +9,7 @@
 [ext_resource path="res://enemy/Enemy.tscn" type="PackedScene" id=7]
 [ext_resource path="res://background/ParallaxBg.tscn" type="PackedScene" id=8]
 [ext_resource path="res://audio/music.ogg" type="AudioStream" id=9]
+[ext_resource path="res://Inventory.gd" type="Script" id=10]
 
 [sub_resource type="PhysicsMaterial" id=1]
 friction = 0.0
@@ -210,6 +211,24 @@ position = Vector2( 463.849, 560.405 )
 [node name="Player" parent="." instance=ExtResource( 6 )]
 position = Vector2( 125.842, 522.8 )
 physics_material_override = SubResource( 1 )
+
+[node name="_dItemCountLabel" type="Label" parent="Player"]
+margin_left = -44.842
+margin_top = -61.8
+margin_right = 42.158
+margin_bottom = -30.8
+text = "Item Count: x
+"
+
+[node name="_dCurrentItemLabel" type="Label" parent="Player"]
+margin_left = -48.842
+margin_top = -45.8
+margin_right = 48.158
+margin_bottom = -14.8
+text = "Current Item: x"
+
+[node name="InventoryNode" type="Node" parent="Player"]
+script = ExtResource( 10 )
 
 [node name="Enemies" type="Node2D" parent="."]
 
