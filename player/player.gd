@@ -23,12 +23,12 @@ extends RigidBody2D
 #    - Friction cant be used, so floor velocity must be considered
 #      for moving platforms.
 
-const WALK_ACCEL = 500.0
+const WALK_ACCEL = 200.0
 const WALK_DEACCEL = 500.0
 const WALK_MAX_VELOCITY = 140.0
-const AIR_ACCEL = 100.0
-const AIR_DEACCEL = 100.0
-const JUMP_VELOCITY = 380
+const AIR_ACCEL = 50.0
+const AIR_DEACCEL = 70.0
+const JUMP_VELOCITY = 400
 const STOP_JUMP_FORCE = 450.0
 const MAX_SHOOT_POSE_TIME = 0.3
 const MAX_FLOOR_AIRBORNE_TIME = 0.15
@@ -38,7 +38,8 @@ var siding_left = false
 var jumping = false
 var stopping_jump = false
 var shooting = false
-
+onready var rollRayCast = get_node("rollRay")
+onready var time = get_node("Timer")
 var floor_h_velocity = 0.0
 
 var airborne_time = 1e20
@@ -46,7 +47,7 @@ var shoot_time = 1e20
 
 var Bullet = preload("res://player/Bullet.tscn")
 var Enemy = preload("res://enemy/Enemy.tscn")
-
+var canDash = false; 
 onready var sound_jump = $SoundJump
 onready var sound_shoot = $SoundShoot
 onready var sprite = $Sprite
@@ -69,7 +70,7 @@ func _integrate_forces(s):
 	var spawn = Input.is_action_pressed("spawn")
 
 	if spawn:
-		call_deferred("_spawn_enemy_above")
+		call_deferred("_rolling")
 
 	# Deapply prev floor velocity.
 	lv.x -= floor_h_velocity
@@ -178,12 +179,14 @@ func _integrate_forces(s):
 				new_anim = "falling"
 
 	# Update siding.
+	
 	if new_siding_left != siding_left:
 		if new_siding_left:
 			sprite.scale.x = -1
+			rollRayCast.scale.x = -1
 		else:
 			sprite.scale.x = 1
-
+			rollRayCast.scale.x = 1
 		siding_left = new_siding_left
 
 	# Change animation.
@@ -228,3 +231,19 @@ func _spawn_enemy_above():
 	var e = Enemy.instance()
 	e.position = position + 50 * Vector2.UP
 	get_parent().add_child(e)
+
+func _rolling():
+	var rollPosition = get_position()
+	if canDash:
+		if not rollRayCast.is_colliding():
+			if siding_left:
+				self.position = Vector2(rollPosition.x - 75.0, rollPosition.y)
+			else:
+				self.position = Vector2(rollPosition.x + 75.0, rollPosition.y)
+			canDash = false
+			time.set_wait_time(3.0)
+	
+
+
+func _on_Timer_timeout():
+	canDash = true
