@@ -173,3 +173,11 @@ stream = ExtResource( 4 )
 
 [node name="SoundExplode" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource( 5 )
+
+[node name="RayCastWallLeft" type="RayCast2D" parent="."]
+enabled = true
+cast_to = Vector2( -22, 0 )
+
+[node name="RayCastWallRight" type="RayCast2D" parent="."]
+enabled = true
+cast_to = Vector2( 22, 0 )
