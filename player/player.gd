@@ -235,7 +235,7 @@ func _spawn_enemy_above():
 func _rolling():
 	var rollPosition = get_position()
 	if canDash:
-		if not rollRayCast.is_colliding():
+		if (not rollRayCast.is_colliding()):
 			if siding_left:
 				self.position = Vector2(rollPosition.x - 75.0, rollPosition.y)
 			else:
