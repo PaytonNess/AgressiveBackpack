@@ -46,13 +46,13 @@ func add_item(itemID):
 	#Receives ID of item being picked up
 	inventory.push_front(itemID)
 	inventory_size += 1
-	display_current_item_debug(true)
+	#display_current_item_debug(true)
 	
 func throw_item():
 	#Returns ID of item being withdrawn from bag
 	var i = inventory.pop_front()
-	if(inventory.size() > 0): display_current_item_debug(true)
-	else: display_current_item_debug(false)
+#	if(inventory.size() > 0): display_current_item_debug(true)
+#	else: display_current_item_debug(false)
 	
 	player.throw_object(item_dict_obj[i].instance())
 	
@@ -66,15 +66,15 @@ func get_current_item_id():
 func get_current_item_name():
 	return item_dict[inventory[0]]
 	
-func display_current_item_debug(var hasItem):
-	var labelCount = get_tree().get_root().find_node("_dItemCountLabel", true, false)
-	labelCount.text = "Item Count: "+str(inventory_size)
-	
-	var label = get_tree().get_root().find_node("_dCurrentItemLabel", true, false)
-	if(hasItem):
-		label.text = "Current Item: "+item_dict[inventory[0]]
-	else:
-		label.text = "Current Item: NONE"
+#func display_current_item_debug(var hasItem):
+#	var labelCount = get_tree().get_root().find_node("_dItemCountLabel", true, false)
+#	labelCount.text = "Item Count: "+str(inventory_size)
+#
+#	var label = get_tree().get_root().find_node("_dCurrentItemLabel", true, false)
+#	if(hasItem):
+#		label.text = "Current Item: "+item_dict[inventory[0]]
+#	else:
+#		label.text = "Current Item: NONE"
 	
 func has_item():
 	#Returns true if backpack not empty, false if empty

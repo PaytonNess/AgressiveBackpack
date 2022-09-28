@@ -24,7 +24,7 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://DebugObject.gd"
 }, {
-"base": "Reference",
+"base": "RigidBody2D",
 "class": "Enemy",
 "language": "GDScript",
 "path": "res://enemy/enemy.gd"
