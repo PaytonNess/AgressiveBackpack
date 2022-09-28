@@ -1,0 +1,46 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://coin/coin.png" type="Texture" id=1]
+[ext_resource path="res://DebugObject.gd" type="Script" id=2]
+
+[sub_resource type="Animation" id=2]
+resource_name = "spin"
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray(  ),
+"transitions": PoolRealArray(  ),
+"update": 1,
+"values": [  ]
+}
+
+[sub_resource type="CircleShape2D" id=3]
+
+[node name="DebugObject" type="Area2D"]
+script = ExtResource( 2 )
+
+[node name="Sprite" type="Sprite" parent="."]
+modulate = Color( 0.027451, 0.996078, 0.631373, 1 )
+texture = ExtResource( 1 )
+hframes = 4
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/spin = SubResource( 2 )
+
+[node name="Enabler" type="VisibilityEnabler2D" parent="."]
+rect = Rect2( -5, -5, 10, 10 )
+pause_particles = false
+
+[node name="ConfirmationDialog" type="ConfirmationDialog" parent="."]
+margin_right = 200.0
+margin_bottom = 70.0
+
+[node name="Collision" type="CollisionShape2D" parent="."]
+shape = SubResource( 3 )
+
+[connection signal="body_entered" from="." to="." method="_on_DebugObject_body_entered"]
+[connection signal="mouse_entered" from="." to="." method="_on_DebugObject_mouse_entered"]

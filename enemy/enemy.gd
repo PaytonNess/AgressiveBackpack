@@ -4,8 +4,9 @@ extends RigidBody2D
 const WALK_SPEED = 50
 
 enum State {
-	WALKING,
+	WALKING, #roaming
 	DYING,
+	CHASING,
 }
 
 var state = State.WALKING
@@ -14,9 +15,12 @@ var direction = -1
 var anim = ""
 
 var Bullet = preload("res://player/bullet.gd")
+onready var Player = get_tree().get_root().find_node("Player", true, false)
 
 onready var rc_left = $RaycastLeft
 onready var rc_right = $RaycastRight
+onready var rc_wall_left = $RayCastWallLeft
+onready var rc_wall_right = $RayCastWallRight
 
 func _integrate_forces(s):
 	var lv = s.get_linear_velocity()
@@ -55,6 +59,36 @@ func _integrate_forces(s):
 			($Sprite as Sprite).scale.x = -direction
 
 		lv.x = direction * WALK_SPEED
+	elif state == State.CHASING:
+		new_anim = "walk"
+			
+		for i in range(s.get_contact_count()):
+			var cc = s.get_contact_collider_object(i)
+			var dp = s.get_contact_local_normal(i)
+
+			if cc:
+				if cc is Bullet and not cc.disabled:
+					# enqueue call
+					call_deferred("_bullet_collider", cc, s, dp)
+					break
+					
+
+			
+		var motion = Vector2.ZERO
+		var pos = get_position()
+		motion += pos.direction_to(Player.position)
+		lv.x = motion.x * WALK_SPEED
+			
+		if rc_wall_left.is_colliding():
+			lv.y = -250
+			lv.x = 10 * -WALK_SPEED
+		elif rc_wall_right.is_colliding():
+			lv.y = -250
+			lv.x = 10 * WALK_SPEED
+
+
+			
+
 
 	if anim != new_anim:
 		anim = new_anim
@@ -86,3 +120,9 @@ func _bullet_collider(cc, s, dp):
 	physics_material_override.friction = 1
 	cc.disable()
 	($SoundHit as AudioStreamPlayer2D).play()
+	
+#DEBUG ONLY!!
+func _process(delta):
+	#target player
+	if (Input.is_key_pressed(KEY_J)):
+		state = State.CHASING

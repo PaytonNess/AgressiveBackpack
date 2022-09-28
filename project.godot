@@ -19,7 +19,12 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://coin/coin.gd"
 }, {
-"base": "RigidBody2D",
+"base": "Area2D",
+"class": "DebugObject",
+"language": "GDScript",
+"path": "res://DebugObject.gd"
+}, {
+"base": "Reference",
 "class": "Enemy",
 "language": "GDScript",
 "path": "res://enemy/enemy.gd"
@@ -34,6 +39,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://platform/moving_platform.gd"
 }, {
+"base": "Area2D",
+"class": "Pickup",
+"language": "GDScript",
+"path": "res://items/Pickup.gd"
+}, {
 "base": "RigidBody2D",
 "class": "Player",
 "language": "GDScript",
@@ -42,15 +52,17 @@ _global_script_classes=[ {
 _global_script_class_icons={
 "Bullet": "",
 "Coin": "",
+"DebugObject": "",
 "Enemy": "",
 "GitAPI": "",
 "MovingPlatform": "",
+"Pickup": "",
 "Player": ""
 }
 
 [application]
 
-config/name="Physics-Based Platformer 2D"
+config/name="Aggresive Backpack"
 config/description="This demo uses RigidBody2D for the player and enemies. These
 character controllers are more powerful than KinematicBody2D,
 but can be more difficult to handle, as they require
