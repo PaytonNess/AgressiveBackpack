@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=2]
+[gd_scene load_steps=25 format=2]
 
 [ext_resource path="res://Tileset.tres" type="TileSet" id=1]
 [ext_resource path="res://coin/Coin.tscn" type="PackedScene" id=2]
@@ -11,6 +11,7 @@
 [ext_resource path="res://audio/music.ogg" type="AudioStream" id=9]
 [ext_resource path="res://Inventory.gd" type="Script" id=10]
 [ext_resource path="res://DebugObject.tscn" type="PackedScene" id=11]
+[ext_resource path="res://items/Pickup.tscn" type="PackedScene" id=12]
 
 [sub_resource type="PhysicsMaterial" id=1]
 friction = 0.0
@@ -228,11 +229,6 @@ margin_right = 48.158
 margin_bottom = -14.8
 text = "Current Item: x"
 
-[node name="Inventory" type="Node" parent="Player"]
-
-[node name="InventoryNode" type="Node" parent="Player/Inventory"]
-script = ExtResource( 10 )
-
 [node name="Enemies" type="Node2D" parent="."]
 
 [node name="Enemy1" parent="Enemies" instance=ExtResource( 7 )]
@@ -296,6 +292,10 @@ stream = ExtResource( 9 )
 autoplay = true
 
 [node name="DebugObject" parent="." instance=ExtResource( 11 )]
-
-[node name="DebugObject" parent="DebugObject" instance=ExtResource( 11 )]
 position = Vector2( 246, 528 )
+
+[node name="Inventory" type="Node" parent="."]
+script = ExtResource( 10 )
+
+[node name="Node2D" parent="." instance=ExtResource( 12 )]
+position = Vector2( 218, 537 )

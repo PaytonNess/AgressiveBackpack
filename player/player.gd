@@ -54,6 +54,8 @@ onready var sprite_smoke = sprite.get_node(@"Smoke")
 onready var animation_player = $AnimationPlayer
 onready var bullet_shoot = $BulletShoot
 
+onready var inventory = get_tree().get_root().find_node("Inventory", true, false)
+
 func _integrate_forces(s):
 	var lv = s.get_linear_velocity()
 	var step = s.get_step()
@@ -88,8 +90,9 @@ func _integrate_forces(s):
 
 	# A good idea when implementing characters of all kinds,
 	# compensates for physics imprecision, as well as human reaction delay.
-	if shoot and not shooting:
-		call_deferred("_shot_bullet")
+	if shoot and not shooting and inventory.has_item():
+		inventory.throw_item()
+		#call_deferred("_shot_bullet")
 	else:
 		shoot_time += step
 
@@ -219,6 +222,26 @@ func _shot_bullet():
 	bi.linear_velocity = Vector2(400.0 * ss, -40)
 
 	sprite_smoke.restart()
+	sound_shoot.play()
+
+	add_collision_exception_with(bi) # Make bullet and this not collide.
+	
+func throw_object(bi):
+	#Takes instance of object being thrown
+	
+	shoot_time = 0
+	#var bi = Bullet.instance()
+	var ss
+	if siding_left:
+		ss = -1.0
+	else:
+		ss = 1.0
+	var pos = position + bullet_shoot.position * Vector2(ss, 1.0)
+
+	bi.position = pos
+	get_parent().add_child(bi)
+
+	bi.linear_velocity = Vector2(400.0 * ss, -40)
 	sound_shoot.play()
 
 	add_collision_exception_with(bi) # Make bullet and this not collide.

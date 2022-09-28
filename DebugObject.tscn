@@ -41,3 +41,6 @@ margin_bottom = 70.0
 
 [node name="Collision" type="CollisionShape2D" parent="."]
 shape = SubResource( 3 )
+
+[connection signal="body_entered" from="." to="." method="_on_DebugObject_body_entered"]
+[connection signal="mouse_entered" from="." to="." method="_on_DebugObject_mouse_entered"]
