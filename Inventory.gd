@@ -3,6 +3,7 @@ extends Node
 # Inventory array, stores IDs of items
 var inventory = []
 onready var player = get_tree().get_root().find_node("Player", true, false)
+onready var HUD = get_tree().get_root().find_node("HUD", true, false)
 #Dictionary of IDs
 #var item_dict = {"HP Potion": 0, "Knife": 1, "Spellbook": 2, "Bomb": 3, 
 #"Poison": 4, "Bone": 5, "Shoe": 6, "Arm": 7, "Rat": 8}
@@ -46,13 +47,14 @@ func add_item(itemID):
 	#Receives ID of item being picked up
 	inventory.push_front(itemID)
 	inventory_size += 1
+	HUD.setItemSprite(itemID)
 	#display_current_item_debug(true)
 	
 func throw_item():
 	#Returns ID of item being withdrawn from bag
 	var i = inventory.pop_front()
-#	if(inventory.size() > 0): display_current_item_debug(true)
-#	else: display_current_item_debug(false)
+	if(inventory.size() >= 1): HUD.setItemSprite(inventory[0])
+	else: HUD.setItemSprite(-1)
 	
 	player.throw_object(item_dict_obj[i].instance())
 	
@@ -69,7 +71,7 @@ func get_current_item_name():
 #func display_current_item_debug(var hasItem):
 #	var labelCount = get_tree().get_root().find_node("_dItemCountLabel", true, false)
 #	labelCount.text = "Item Count: "+str(inventory_size)
-#
+#	
 #	var label = get_tree().get_root().find_node("_dCurrentItemLabel", true, false)
 #	if(hasItem):
 #		label.text = "Current Item: "+item_dict[inventory[0]]

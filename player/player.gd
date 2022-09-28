@@ -239,12 +239,13 @@ func throw_object(bi):
 		ss = -1.0
 	else:
 		ss = 1.0
-	var pos = position + bullet_shoot.position * Vector2(ss, 1.0)
+	var pos = position + bullet_shoot.position * Vector2(ss, -1.0)
 
 	bi.position = pos
 	get_parent().add_child(bi)
 
-	bi.linear_velocity = Vector2(400.0 * ss, -40)
+	var launchVel = 400.0*(1/bi.mass)
+	bi.linear_velocity = Vector2(launchVel * ss, -40)
 	sound_shoot.play()
 
 	add_collision_exception_with(bi) # Make bullet and this not collide.
