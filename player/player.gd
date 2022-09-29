@@ -266,4 +266,5 @@ func _take_Damage():
 		if health == 1:
 			heart3.enabled(false)
 			health = 0
+			
 		time.set_wait_time(3.0)
