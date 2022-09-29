@@ -9,10 +9,10 @@
 config_version=4
 
 _global_script_classes=[ {
-"base": "Reference",
+"base": "RigidBody2D",
 "class": "Bullet",
 "language": "GDScript",
-"path": "res://player/hammer.gd"
+"path": "res://player/bullet.gd"
 }, {
 "base": "Area2D",
 "class": "Coin",
@@ -48,6 +48,21 @@ _global_script_classes=[ {
 "class": "Player",
 "language": "GDScript",
 "path": "res://player/player.gd"
+}, {
+"base": "RigidBody2D",
+"class": "book",
+"language": "GDScript",
+"path": "res://player/book.gd"
+}, {
+"base": "RigidBody2D",
+"class": "eye",
+"language": "GDScript",
+"path": "res://player/eye.gd"
+}, {
+"base": "RigidBody2D",
+"class": "hammer",
+"language": "GDScript",
+"path": "res://player/hammer.gd"
 } ]
 _global_script_class_icons={
 "Bullet": "",
@@ -57,7 +72,10 @@ _global_script_class_icons={
 "GitAPI": "",
 "MovingPlatform": "",
 "Pickup": "",
-"Player": ""
+"Player": "",
+"book": "",
+"eye": "",
+"hammer": ""
 }
 
 [application]

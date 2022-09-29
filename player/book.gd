@@ -1,4 +1,4 @@
-class_name Bullet
+class_name book
 extends RigidBody2D
 
 var disabled = false

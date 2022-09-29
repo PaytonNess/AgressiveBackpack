@@ -24,9 +24,9 @@ onready var rc_wall_right = $RayCastWallRight
 
 var rng = RandomNumberGenerator.new() #used for random item spawnsz
 
-var Book = preload("res://items/Book.tscn")
-var Eye = preload("res://items/Eye.tscn")
-var Hammer = preload("res://items/Hammer.tscn")
+var Book = preload("res://player/book.gd")
+var Eye = preload("res://player/eye.gd")
+var Hammer = preload("res://player/hammer.gd")
 var Pickup = preload("res://items/Pickup.tscn")
 var item_dict_obj = {0: Eye, 1: Hammer, 2: Book}
 
