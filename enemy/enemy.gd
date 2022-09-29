@@ -24,10 +24,10 @@ onready var rc_wall_right = $RayCastWallRight
 
 var rng = RandomNumberGenerator.new() #used for random item spawnsz
 
-var Book = preload("res://player/book.gd")
-var Eye = preload("res://player/eye.gd")
-var Hammer = preload("res://player/hammer.gd")
-var Pickup = preload("res://items/Pickup.tscn")
+var Book = preload("res://items/Book.gd")
+var Eye = preload("res://items/Eye.gd")
+var Hammer = preload("res://items/Hammer.gd")
+var Pickup = preload("res://items/Pickup.gd")
 var item_dict_obj = {0: Eye, 1: Hammer, 2: Book}
 
 func _integrate_forces(s):
@@ -44,18 +44,15 @@ func _integrate_forces(s):
 		for i in range(s.get_contact_count()):
 			var cc = s.get_contact_collider_object(i)
 			var dp = s.get_contact_local_normal(i)
-
 			if cc:
-				if cc is Book or cc is Eye or cc is Hammer:
+				if cc is Book or cc is Hammer or cc is Eye:
 					# enqueue call
 					call_deferred("_bullet_collider", cc, s, dp)
 					break
-
 			if dp.x > 0.9:
 				wall_side = 1.0
 			elif dp.x < -0.9:
 				wall_side = -1.0
-
 		if wall_side != 0 and wall_side != direction:
 			direction = -direction
 			($Sprite as Sprite).scale.x = -direction
@@ -65,7 +62,6 @@ func _integrate_forces(s):
 		elif direction > 0 and not rc_right.is_colliding() and rc_left.is_colliding():
 			direction = -direction
 			($Sprite as Sprite).scale.x = -direction
-
 		lv.x = direction * WALK_SPEED
 	elif state == State.CHASING:
 		new_anim = "walk"
@@ -75,7 +71,6 @@ func _integrate_forces(s):
 			var dp = s.get_contact_local_normal(i)
 			if cc is Player:
 				call_deferred(get_node("Player")._take_Damage())
-
 			if cc:
 				if cc is Book or cc is Eye or cc is Hammer:
 					# enqueue call

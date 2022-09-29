@@ -48,21 +48,6 @@ _global_script_classes=[ {
 "class": "Player",
 "language": "GDScript",
 "path": "res://player/player.gd"
-}, {
-"base": "RigidBody2D",
-"class": "book",
-"language": "GDScript",
-"path": "res://player/book.gd"
-}, {
-"base": "RigidBody2D",
-"class": "eye",
-"language": "GDScript",
-"path": "res://player/eye.gd"
-}, {
-"base": "RigidBody2D",
-"class": "hammer",
-"language": "GDScript",
-"path": "res://player/hammer.gd"
 } ]
 _global_script_class_icons={
 "Bullet": "",
@@ -72,10 +57,7 @@ _global_script_class_icons={
 "GitAPI": "",
 "MovingPlatform": "",
 "Pickup": "",
-"Player": "",
-"book": "",
-"eye": "",
-"hammer": ""
+"Player": ""
 }
 
 [application]

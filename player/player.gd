@@ -25,7 +25,7 @@ var shoot_time = 1e20
 var canTakeDamage = false
 
 var Bullet = preload("res://player/Bullet.tscn")
-var Enemy = preload("res://enemy/Enemy.tscn")
+var Enemy = ("res://enemy/Enemy.tscn")
 var canDash = false; 
 onready var sound_jump = $SoundJump
 onready var sound_shoot = $SoundShoot
