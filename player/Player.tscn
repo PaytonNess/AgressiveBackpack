@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=2]
+[gd_scene load_steps=23 format=2]
 
 [ext_resource path="res://player/player.gd" type="Script" id=1]
 [ext_resource path="res://KleinerSheet (1).png" type="Texture" id=2]
@@ -9,8 +9,6 @@
 [ext_resource path="res://player/osb_fire.png" type="Texture" id=7]
 [ext_resource path="res://audio/sound_shoot.wav" type="AudioStream" id=8]
 [ext_resource path="res://audio/sound_jump.wav" type="AudioStream" id=9]
-[ext_resource path="res://background/Throwbold_Foreground.png" type="Texture" id=10]
-[ext_resource path="res://heart.png" type="Texture" id=11]
 
 [sub_resource type="PhysicsMaterial" id=1]
 friction = 0.0
@@ -289,21 +287,3 @@ stream = ExtResource( 8 )
 
 [node name="SoundJump" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource( 9 )
-
-[node name="Heart1" type="Sprite" parent="."]
-position = Vector2( 172, -88 )
-scale = Vector2( 0.175758, 0.175758 )
-texture = ExtResource( 11 )
-offset = Vector2( -39.8276, 3.05176e-05 )
-
-[node name="Heart2" type="Sprite" parent="."]
-position = Vector2( 141, -87 )
-scale = Vector2( 0.175758, 0.175758 )
-texture = ExtResource( 11 )
-offset = Vector2( -39.8276, 3.05176e-05 )
-
-[node name="Heart3" type="Sprite" parent="."]
-position = Vector2( 110, -87 )
-scale = Vector2( 0.175758, 0.175758 )
-texture = ExtResource( 11 )
-offset = Vector2( -39.8276, 3.05176e-05 )

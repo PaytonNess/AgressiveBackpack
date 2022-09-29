@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=2]
+[gd_scene load_steps=25 format=2]
 
 [ext_resource path="res://enemy/Enemy.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Tileset.tres" type="TileSet" id=2]
@@ -10,6 +10,8 @@
 [ext_resource path="res://platform/MovingPlatform.tscn" type="PackedScene" id=8]
 [ext_resource path="res://player/Player.tscn" type="PackedScene" id=9]
 [ext_resource path="res://hud/HUD.tscn" type="PackedScene" id=10]
+
+[sub_resource type="TileSet" id=14]
 
 [sub_resource type="PhysicsMaterial" id=1]
 friction = 0.0
@@ -52,6 +54,7 @@ friction = 0.0
 friction = 0.0
 
 [node name="Stage" type="Node2D"]
+position = Vector2( -1, 0 )
 
 [node name="TileMap" type="TileMap" parent="."]
 tile_set = ExtResource( 2 )
@@ -66,7 +69,7 @@ __meta__ = {
 
 [node name="TileMap" type="TileMap" parent="TileMap"]
 z_index = 4
-tile_set = ExtResource( 2 )
+tile_set = SubResource( 14 )
 cell_size = Vector2( 32, 32 )
 cell_quadrant_size = 4
 show_collision = true
@@ -75,6 +78,9 @@ tile_data = PoolIntArray( 917508, 55, 0, 983044, 56, 0, 983048, 58, 0, 1048590, 
 __meta__ = {
 "_editor_description_": ""
 }
+
+[node name="TileMap" type="TileMap" parent="TileMap/TileMap"]
+format = 1
 
 [node name="Label2" type="Label" parent="TileMap"]
 margin_left = 72.0
@@ -133,7 +139,7 @@ position = Vector2( 1201.4, 424.76 )
 position = Vector2( 463.849, 560.405 )
 
 [node name="Player" parent="." instance=ExtResource( 9 )]
-position = Vector2( 742, -61 )
+position = Vector2( 175, 515 )
 physics_material_override = SubResource( 1 )
 
 [node name="rollRay" type="RayCast2D" parent="Player"]
@@ -175,7 +181,7 @@ position = Vector2( 803.69, 461.62 )
 physics_material_override = SubResource( 6 )
 
 [node name="Enemy6" parent="Enemies" instance=ExtResource( 1 )]
-position = Vector2( 1293.45, 469.53 )
+position = Vector2( 1468, 290 )
 physics_material_override = SubResource( 7 )
 
 [node name="Enemy7" parent="Enemies" instance=ExtResource( 1 )]
@@ -187,7 +193,7 @@ position = Vector2( 596.815, 230.191 )
 physics_material_override = SubResource( 9 )
 
 [node name="Enemy9" parent="Enemies" instance=ExtResource( 1 )]
-position = Vector2( 2650, -94 )
+position = Vector2( 2469, -194 )
 physics_material_override = SubResource( 10 )
 
 [node name="Enemy10" parent="Enemies" instance=ExtResource( 1 )]
@@ -221,5 +227,6 @@ autoplay = true
 script = ExtResource( 6 )
 
 [node name="HUD" parent="." instance=ExtResource( 10 )]
+visible = false
 
 [connection signal="timeout" from="Player/Timer" to="Player" method="_on_Timer_timeout"]

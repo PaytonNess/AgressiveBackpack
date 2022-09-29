@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://UI_Sprite_Sheet.png" type="Texture" id=1]
 [ext_resource path="res://background/Throwbold_Foreground.png" type="Texture" id=2]
 [ext_resource path="res://items/ItemNone.png" type="Texture" id=3]
 [ext_resource path="res://hud/HUD.gd" type="Script" id=4]
+[ext_resource path="res://heart.png" type="Texture" id=5]
 
 [node name="HUD" type="CanvasLayer"]
 script = ExtResource( 4 )
@@ -22,3 +23,21 @@ texture = ExtResource( 2 )
 [node name="ItemSprite" type="Sprite" parent="."]
 position = Vector2( 95, 408 )
 texture = ExtResource( 3 )
+
+[node name="Heart1" type="Sprite" parent="."]
+position = Vector2( 755, 85 )
+scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 5 )
+offset = Vector2( -39.8276, 3.05176e-05 )
+
+[node name="Heart2" type="Sprite" parent="."]
+position = Vector2( 677, 86 )
+scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 5 )
+offset = Vector2( -39.8276, 3.05176e-05 )
+
+[node name="Heart3" type="Sprite" parent="."]
+position = Vector2( 599, 86 )
+scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 5 )
+offset = Vector2( -39.8276, 3.05176e-05 )
