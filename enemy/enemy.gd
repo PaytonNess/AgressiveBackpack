@@ -22,6 +22,14 @@ onready var rc_right = $RaycastRight
 onready var rc_wall_left = $RayCastWallLeft
 onready var rc_wall_right = $RayCastWallRight
 
+var rng = RandomNumberGenerator.new() #used for random item spawnsz
+
+var Book = preload("res://items/Book.tscn")
+var Eye = preload("res://items/Eye.tscn")
+var Hammer = preload("res://items/Hammer.tscn")
+var Pickup = preload("res://items/Pickup.tscn")
+var item_dict_obj = {0: Eye, 1: Hammer, 2: Book}
+
 func _integrate_forces(s):
 	var lv = s.get_linear_velocity()
 	var new_anim = anim
@@ -128,3 +136,12 @@ func _process(delta):
 	#target player
 	if (Input.is_key_pressed(KEY_J)):
 		state = State.CHASING
+
+func spawn_item():
+	#get random item to add
+	rng.randomize()
+	var i = rng.randi_range(0, 2)
+	var e = Pickup.instance()
+	e.init(i)
+	e.position = position
+	get_parent().add_child(e)
