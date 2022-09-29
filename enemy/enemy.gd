@@ -65,6 +65,8 @@ func _integrate_forces(s):
 		for i in range(s.get_contact_count()):
 			var cc = s.get_contact_collider_object(i)
 			var dp = s.get_contact_local_normal(i)
+			if s.is_colliding(Player):
+				call_deferred(get_node("Player")._take_Damage())
 
 			if cc:
 				if cc is Bullet and not cc.disabled:

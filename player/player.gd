@@ -1,28 +1,6 @@
 class_name Player
 extends RigidBody2D
 
-# Character Demo, written by Juan Linietsky.
-#
-#  Implementation of a 2D Character controller.
-#  This implementation uses the physics engine for
-#  controlling a character, in a very similar way
-#  than a 3D character controller would be implemented.
-#
-#  Using the physics engine for this has the main advantages:
-#    - Easy to write.
-#    - Interaction with other physics-based objects is free
-#    - Only have to deal with the object linear velocity, not position
-#    - All collision/area framework available
-#
-#  But also has the following disadvantages:
-#    - Objects may bounce a little bit sometimes
-#    - Going up ramps sends the chracter flying up, small hack is needed.
-#    - A ray collider is needed to avoid sliding down on ramps and
-#      undesiderd bumps, small steps and rare numerical precision errors.
-#      (another alternative may be to turn on friction when the character is not moving).
-#    - Friction cant be used, so floor velocity must be considered
-#      for moving platforms.
-
 const WALK_ACCEL = 200.0
 const WALK_DEACCEL = 500.0
 const WALK_MAX_VELOCITY = 140.0
@@ -44,6 +22,7 @@ var floor_h_velocity = 0.0
 
 var airborne_time = 1e20
 var shoot_time = 1e20
+var canTakeDamage = false
 
 var Bullet = preload("res://player/Bullet.tscn")
 var Enemy = preload("res://enemy/Enemy.tscn")
@@ -56,7 +35,10 @@ onready var animation_player = $AnimationPlayer
 onready var bullet_shoot = $BulletShoot
 
 onready var inventory = get_tree().get_root().find_node("Inventory", true, false)
-
+onready var heart1 = get_tree().get_root().find_node("Heart1", true, false)
+onready var heart2 = get_tree().get_root().find_node("Heart2", true, false)
+onready var heart3 = get_tree().get_root().find_node("Heart3", true, false)
+var health = 3
 func _integrate_forces(s):
 	var lv = s.get_linear_velocity()
 	var step = s.get_step()
@@ -270,3 +252,17 @@ func _rolling():
 
 func _on_Timer_timeout():
 	canDash = true
+	canTakeDamage = true
+
+func _take_Damage():
+	if canTakeDamage:
+		if health == 3:
+			health = 2
+			heart1.enabled(false)
+		if health == 2:
+			health = 1
+			heart2.enabled(false)
+		if health == 1:
+			heart3.enabled(false)
+			health = 0
+		time.set_wait_time(3.0)
