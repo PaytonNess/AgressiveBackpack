@@ -124,8 +124,6 @@ anims/walk = SubResource( 4 )
 
 [node name="Sprite" type="Sprite" parent="."]
 self_modulate = Color( 1, 1, 1, 0 )
-position = Vector2( 91.52, -88.5 )
-scale = Vector2( 8.04, 6.53125 )
 texture = ExtResource( 2 )
 hframes = 4
 vframes = 4
