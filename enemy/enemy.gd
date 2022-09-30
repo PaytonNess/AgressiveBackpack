@@ -15,7 +15,7 @@ var direction = -1
 var anim = ""
 
 var Bullet = preload("res://player/bullet.gd")
-onready var Player = get_tree().get_root().find_node("Player", true, false)
+var Player = preload("res://player/player.gd")
 
 onready var rc_left = $RaycastLeft
 onready var rc_right = $RaycastRight
@@ -27,7 +27,7 @@ var rng = RandomNumberGenerator.new() #used for random item spawnsz
 var Book = preload("res://items/Book.gd")
 var Eye = preload("res://items/Eye.gd")
 var Hammer = preload("res://items/Hammer.gd")
-var Pickup = preload("res://items/Pickup.gd")
+var Pickup = preload("res://items/Pickup.tscn")
 var item_dict_obj = {0: Eye, 1: Hammer, 2: Book}
 
 func _integrate_forces(s):
@@ -45,8 +45,15 @@ func _integrate_forces(s):
 			var cc = s.get_contact_collider_object(i)
 			var dp = s.get_contact_local_normal(i)
 			if cc:
+				if cc is Player:
+					Player._take_Damage()
+					if ResourceLoader.exists("res://Scenes/replay.tscn"):
+						var _error = get_tree().change_scene("res://Scenes/replay.tscn")
+					else:
+						get_tree().change_scene("res://Scenes/replay.tscn")
 				if cc is Book or cc is Hammer or cc is Eye:
 					# enqueue call
+					spawn_item()
 					call_deferred("_bullet_collider", cc, s, dp)
 					break
 			if dp.x > 0.9:
@@ -70,10 +77,15 @@ func _integrate_forces(s):
 			var cc = s.get_contact_collider_object(i)
 			var dp = s.get_contact_local_normal(i)
 			if cc is Player:
-				call_deferred(get_node("Player")._take_Damage())
+				call_deferred(Player._take_Damage())
+				if ResourceLoader.exists("res://Scenes/replay.tscn"):
+					var _error = get_tree().change_scene("res://Scenes/replay.tscn")
+				else:
+					get_tree().change_scene("res://Scenes/replay.tscn")
 			if cc:
 				if cc is Book or cc is Eye or cc is Hammer:
 					# enqueue call
+					spawn_item()
 					call_deferred("_bullet_collider", cc, s, dp)
 					break
 					
@@ -138,5 +150,5 @@ func spawn_item():
 	var i = rng.randi_range(0, 2)
 	var e = Pickup.instance()
 	e.init(i)
-	e.position = position
+	e.position = get_position()
 	get_parent().add_child(e)

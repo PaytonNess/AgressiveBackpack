@@ -36,6 +36,6 @@ func _on_Node2D_body_entered(body):
 	if not taken and body is Player:
 		taken = true
 		print("Picked Up Object: "+str(id))
-		var inv = $"../Inventory"
+		var inv = get_tree().get_root().find_node("Inventory", true, false)
 		inv.add_item(id)
 		queue_free() #This kills the object
