@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=2]
+[gd_scene load_steps=29 format=2]
 
 [ext_resource path="res://enemy/Enemy.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Tileset.tres" type="TileSet" id=2]
@@ -13,6 +13,47 @@
 [ext_resource path="res://Signs_and_Symbols_Sprite_Sheet.png" type="Texture" id=11]
 [ext_resource path="res://enemy/EnemySpawner.tscn" type="PackedScene" id=12]
 [ext_resource path="res://items/PickupSpawner.tscn" type="PackedScene" id=13]
+[ext_resource path="res://Throwbold_Map.png" type="Texture" id=14]
+
+[sub_resource type="PhysicsMaterial" id=1]
+friction = 0.0
+
+[sub_resource type="CanvasItemMaterial" id=13]
+particles_animation = true
+particles_anim_h_frames = 1
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="PhysicsMaterial" id=2]
+
+[sub_resource type="PhysicsMaterial" id=3]
+friction = 0.0
+
+[sub_resource type="PhysicsMaterial" id=4]
+friction = 0.0
+
+[sub_resource type="PhysicsMaterial" id=5]
+friction = 0.0
+
+[sub_resource type="PhysicsMaterial" id=6]
+
+[sub_resource type="PhysicsMaterial" id=7]
+friction = 0.0
+
+[sub_resource type="PhysicsMaterial" id=8]
+friction = 0.0
+
+[sub_resource type="PhysicsMaterial" id=9]
+friction = 0.0
+
+[sub_resource type="PhysicsMaterial" id=10]
+friction = 0.0
+
+[sub_resource type="PhysicsMaterial" id=11]
+friction = 0.0
+
+[sub_resource type="PhysicsMaterial" id=12]
+friction = 0.0
 
 [sub_resource type="TileSet" id=14]
 0/name = "Signs_and_Symbols_Sprite_Sheet.png 0"
@@ -86,50 +127,11 @@
 4/shapes = [  ]
 4/z_index = 0
 
-[sub_resource type="PhysicsMaterial" id=1]
-friction = 0.0
-
-[sub_resource type="CanvasItemMaterial" id=13]
-particles_animation = true
-particles_anim_h_frames = 1
-particles_anim_v_frames = 1
-particles_anim_loop = false
-
-[sub_resource type="PhysicsMaterial" id=2]
-
-[sub_resource type="PhysicsMaterial" id=3]
-friction = 0.0
-
-[sub_resource type="PhysicsMaterial" id=4]
-friction = 0.0
-
-[sub_resource type="PhysicsMaterial" id=5]
-friction = 0.0
-
-[sub_resource type="PhysicsMaterial" id=6]
-
-[sub_resource type="PhysicsMaterial" id=7]
-friction = 0.0
-
-[sub_resource type="PhysicsMaterial" id=8]
-friction = 0.0
-
-[sub_resource type="PhysicsMaterial" id=9]
-friction = 0.0
-
-[sub_resource type="PhysicsMaterial" id=10]
-friction = 0.0
-
-[sub_resource type="PhysicsMaterial" id=11]
-friction = 0.0
-
-[sub_resource type="PhysicsMaterial" id=12]
-friction = 0.0
-
 [node name="Stage" type="Node2D"]
 position = Vector2( -1, 0 )
 
 [node name="TileMap" type="TileMap" parent="."]
+visible = false
 tile_set = ExtResource( 2 )
 cell_size = Vector2( 32, 32 )
 cell_quadrant_size = 4
@@ -139,61 +141,6 @@ tile_data = PoolIntArray( -917504, 28, 0, -917503, 28, 1, -917502, 28, 1, -91750
 __meta__ = {
 "_edit_lock_": true
 }
-
-[node name="TileMap" type="TileMap" parent="TileMap"]
-z_index = -7
-tile_set = SubResource( 14 )
-cell_size = Vector2( 32, 32 )
-cell_quadrant_size = 4
-show_collision = true
-format = 1
-tile_data = PoolIntArray( 917506, 0, 0, 917508, 55, 0, 917510, 0, 0, 983044, 56, 0, 983048, 58, 0, 1048588, 0, 0, 1048590, 55, 0, 1114126, 58, 0, 1114130, 0, 0, 1179668, 57, 0 )
-__meta__ = {
-"_editor_description_": ""
-}
-
-[node name="TileMap" type="TileMap" parent="TileMap/TileMap"]
-tile_set = SubResource( 14 )
-cell_size = Vector2( 32, 32 )
-cell_quadrant_size = 4
-show_collision = true
-format = 1
-tile_data = PoolIntArray( 917508, 2, 0, 983044, 3, 0, 983048, 1, 0, 1048590, 4, 0, 1114126, 2, 0, 1179666, 4, 0, 1179667, 4, 0, 1179668, 4, 0 )
-__meta__ = {
-"_editor_description_": ""
-}
-
-[node name="Label2" type="Label" parent="TileMap/TileMap"]
-margin_left = 72.0
-margin_top = 456.0
-margin_right = 199.0
-margin_bottom = 504.0
-text = "Space
-walk over to 
-pick up"
-
-[node name="Label3" type="Label" parent="TileMap/TileMap"]
-margin_left = 210.0
-margin_top = 465.0
-margin_right = 337.0
-margin_bottom = 513.0
-text = "W A S D"
-
-[node name="Label4" type="Label" parent="TileMap/TileMap"]
-margin_left = 391.0
-margin_top = 521.0
-margin_right = 518.0
-margin_bottom = 569.0
-text = "Run and 
-jump to go 
-higher"
-
-[node name="Label5" type="Label" parent="TileMap/TileMap"]
-margin_left = 593.0
-margin_top = 563.0
-margin_right = 720.0
-margin_bottom = 611.0
-text = ": to dash"
 
 [node name="Props" type="Node2D" parent="."]
 position = Vector2( -2000, 0 )
@@ -374,5 +321,65 @@ position = Vector2( 1447, 136 )
 
 [node name="Area2D8" parent="." instance=ExtResource( 13 )]
 position = Vector2( 1947, 56 )
+
+[node name="LevelSprite" type="Sprite" parent="."]
+position = Vector2( 1071, 240 )
+z_index = -1
+texture = ExtResource( 14 )
+
+[node name="TileMap2" type="TileMap" parent="."]
+z_index = -7
+tile_set = SubResource( 14 )
+cell_size = Vector2( 32, 32 )
+cell_quadrant_size = 4
+show_collision = true
+format = 1
+tile_data = PoolIntArray( 917506, 0, 0, 917508, 55, 0, 917510, 0, 0, 983044, 56, 0, 983048, 58, 0, 1048588, 0, 0, 1048590, 55, 0, 1114126, 58, 0, 1114130, 0, 0, 1179668, 57, 0 )
+__meta__ = {
+"_editor_description_": ""
+}
+
+[node name="TileMap" type="TileMap" parent="TileMap2"]
+tile_set = SubResource( 14 )
+cell_size = Vector2( 32, 32 )
+cell_quadrant_size = 4
+show_collision = true
+format = 1
+tile_data = PoolIntArray( 917508, 2, 0, 983044, 3, 0, 983048, 1, 0, 1048590, 4, 0, 1114126, 2, 0, 1179666, 4, 0, 1179667, 4, 0, 1179668, 4, 0 )
+__meta__ = {
+"_editor_description_": ""
+}
+
+[node name="Label2" type="Label" parent="TileMap2"]
+margin_left = 72.0
+margin_top = 456.0
+margin_right = 199.0
+margin_bottom = 504.0
+text = "Space
+walk over to 
+pick up"
+
+[node name="Label3" type="Label" parent="TileMap2"]
+margin_left = 210.0
+margin_top = 465.0
+margin_right = 337.0
+margin_bottom = 513.0
+text = "W A S D"
+
+[node name="Label4" type="Label" parent="TileMap2"]
+margin_left = 391.0
+margin_top = 521.0
+margin_right = 518.0
+margin_bottom = 569.0
+text = "Run and 
+jump to go 
+higher"
+
+[node name="Label5" type="Label" parent="TileMap2"]
+margin_left = 593.0
+margin_top = 563.0
+margin_right = 720.0
+margin_bottom = 611.0
+text = ": to dash"
 
 [connection signal="timeout" from="Player/Timer" to="Player" method="_on_Timer_timeout"]
